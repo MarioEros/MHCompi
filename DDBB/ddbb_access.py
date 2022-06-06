@@ -1,10 +1,17 @@
 import sqlite3
-from DDBB.mensajes import get_message
 
+from mensajes import get_message
+from Datos import db_queries
 
-con = sqlite3.connect('../Datos/mhw.db')
+con = sqlite3.connect('Datos/mhw.db')
 
 cursor = con.cursor()
+
+def db_execute_query(query: str):
+    try:
+        cursor.execute(query)
+    except Exception as e:
+        print(e)
 
 def db_tables():
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
@@ -29,7 +36,7 @@ def db_table_content(table: str):
 
 # en,ja,fr,es
 def db_item_by_lang(item:str, lang:str):
-    rows = cursor.execute("SELECT * FROM item_text WHERE name Like ? AND lang_id = ?",('%'+item+'%',lang))
+    cursor.execute("SELECT * FROM item_text WHERE name Like ? AND lang_id = ?",('%'+item+'%',lang))
     print([x[0] for x in cursor.description])
     items = [x for x in cursor]
     if len(items) == 0:
@@ -52,8 +59,9 @@ def db_monster_by_lang(mons:str, lang:str):
         print(get_message('varios_encontrados',lang))
         [print(x[2]) for x in mons]
 
+# db_tables()
 
-# db_table_content('monster')
+db_table_content('users')
 # db_table_content('monster_text')
 # db_table_content('monster_hitzone')
 # db_table_content('monster_break')
@@ -65,3 +73,5 @@ def db_monster_by_lang(mons:str, lang:str):
 # db_table_content('monster_habitat')
 # db_item_by_lang('ay','es')
 # db_monster_by_lang('awd','es')
+
+# db_execute_query(db_queries.sql_create_users_table)
