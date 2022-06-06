@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from DDBB import mensajes
+from DDBB.mensajes import get_message
 import monsterController as monCon
 import itemController as itemCon
 import os
@@ -9,7 +9,7 @@ from loggeador import loggear
 
 from KeepAlive import keep_alive
 
-bot = commands.Bot(command_prefix='$', description="Hey there, I'm Botty (for example)!")
+bot = commands.Bot(command_prefix='$', description="¡Soy un feline-bot que está aquí para ayudarte!")
 
 @bot.event
 async def on_ready():
@@ -28,14 +28,14 @@ async def hola(ctx):
 
 @bot.command()
 async def ayuda(ctx, msg):
-  await ctx.send(mensajes.mensAyuda)
+  await ctx.send(get_message('mensAyuda','es'))
     
 @bot.command()
 async def mons(ctx, *args):
   mons = monCon.buscarMonstruo(args)
   if mons is None:
     loggear('Monstruo no encontrado')
-    await ctx.send(mensajes.mensMonsNoEncontrado)
+    await ctx.send(get_message('no_encontrado','es'))
   else:
     loggear(mons.nombre + ' encontrado')
     cuadro=discord.Embed(title = mons.nombre, description = mons.desc)
@@ -47,11 +47,11 @@ async def mons(ctx, *args):
 
 @bot.command()
 async def item(ctx, *args):
-  item = itemCon.buscarItem(args)
-  if item is None:
-    await ctx.send(mensajes.mensItemNoEncontrado)
+  item_found = itemCon.buscarItem(args)
+  if item_found is None:
+    await ctx.send(get_message('no_encontrado','es'))
   else:
-    cuadro = discord.Embed(title=item.nombre, description=item.desc)
+    cuadro = discord.Embed(title=item_found.nombre, description=item_found.desc)
     await ctx.send(embed=cuadro)
   
 keep_alive()
