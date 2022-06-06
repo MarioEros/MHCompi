@@ -1,0 +1,83 @@
+nombre;forma;descripcion;fuego;agua;rayo;hielo;dragon;veneno;sueño;paralisis;nitro;stun
+Gran Jagras;normal;;3;0;2;2;1;3;3;3;3;3
+Kulu-Ya-Ku;normal;;2;3;2;2;2;2;2;2;2;2
+Pukei-Pukei;normal;;2;0;3;2;1;1;3;3;2;2
+Barroth;normal;;3;0;0;2;1;3;2;3;3;1
+Jyuratodus;alt;Cubierto de barro;0;3;0;2;1;;;;;
+Jyuratodus;normal;;1;0;3;1;1;2;1;2;1;3
+Jyuratodus;alt;Cubierto de barro;0;3;0;1;1;;;;;
+Tobi-Kadachi;normal;;2;3;0;2;1;3;2;2;2;2
+Anjanath;normal;;0;3;2;2;2;1;2;2;1;2
+Rathian;normal;;0;1;2;1;3;1;2;2;1;3
+Tzitzi-Ya-Ku;normal;;2;2;3;3;2;2;2;2;2;2
+Paolumu;normal;;3;0;2;1;1;2;2;2;3;3
+Gran Girros;normal;;2;3;0;2;1;2;3;1;2;2
+Radobaan;normal;;1;1;1;2;3;2;1;2;3;2
+Legiana;normal;;2;1;3;0;1;3;2;2;2;2
+Odogaron;normal;;1;1;2;3;0;1;2;3;2;2
+Rathalos;normal;;0;1;2;1;3;1;2;2;1;2
+Diablos;normal;;0;2;1;3;2;2;2;3;2;1
+Kirin;normal;;3;2;0;2;1;1;2;0;2;1
+Zorah Magdaros;normal;;0;3;1;2;3;0;0;0;0;0
+Dodogama;normal;;0;2;3;2;1;3;2;2;1;2
+Rathian Rosa;normal;;0;1;2;1;3;1;2;2;1;3
+Bazelgeuse;normal;;0;1;3;2;2;2;2;2;1;1
+Deviljho;normal;;2;2;3;1;3;2;2;2;2;2
+Lavasioth;normal;;0;3;2;2;1;3;1;2;1;2
+Lavasioth;alt;Endurecido;1;2;0;0;1;;;;;
+Uragaan;normal;;0;3;1;2;2;3;1;2;2;3
+Rathalos Celeste;normal;;0;1;1;2;3;1;2;2;1;2
+Diablos Negra;normal;;0;2;1;3;0;2;2;3;2;1
+Nergigante;normal;;1;1;3;1;2;2;2;2;2;2
+Teostra;normal;;0;3;1;3;1;2;1;1;1;2
+Lunastra;normal;;0;1;1;3;2;1;1;1;2;2
+Kushala Daora;normal;;1;0;3;0;2;3;1;1;3;2
+Vaal Hazak;normal;;3;0;1;2;3;1;1;1;2;2
+Kulve Taroth;normal;;0;2;0;3;2;1;1;1;1;1
+Kulve Taroth;alt;Cubierta de oro;1;2;3;0;1;;;;;
+Xeno'jiiva;normal;;2;2;2;2;2;3;0;1;2;1
+Beotodus;normal;;3;1;2;0;0;2;2;2;3;2
+Banbaro;normal;;2;0;1;0;3;2;2;2;3;3
+Tobi-Kadachi Vípero;normal;;1;0;3;2;1;1;2;1;2;2
+Paolumu Somnus;normal;;2;3;1;1;0;2;1;2;2;2
+Pukei-Pukei Coralino;normal;;1;0;2;3;1;3;2;2;2;2
+Barioth;normal;;3;0;2;0;1;2;2;2;2;2
+Nargacuga;normal;;2;0;3;1;1;2;2;2;2;2
+Glavenus;normal;;0;3;1;2;2;2;2;2;2;2
+Tigrex;normal;;1;0;3;1;2;2;2;2;2;2
+Brachydios;normal;;0;2;1;3;1;2;2;2;1;2
+Legiana Aullador;normal;;3;1;2;0;1;3;2;2;2;2
+Anjanath Fulgúreo;normal;;2;2;0;3;1;2;2;2;1;2
+Anjanath Fulgúreo;alt;Cargado;2;3;0;2;1;;;;;
+Glavenus Acídico;normal;;3;1;2;1;2;2;2;2;2;2
+Glavenus Acídico;alt;Cristalizado;3;1;2;1;1;;;;;
+Odogaron Ébano;normal;;2;3;2;2;1;3;2;3;2;2
+Velkhana;normal;;3;1;2;0;2;2;1;1;3;1
+Bazelgeuse Magma;normal;;0;1;2;3;1;2;3;2;1;2
+Vaal Hazak Espóreo;normal;;2;0;1;1;2;1;1;1;2;1
+Namielle;normal;;3;0;0;1;2;3;1;1;3;2
+Deviljho Salvaje;normal;;2;2;3;1;3;3;3;3;2;2
+Nergigante Regio;normal;;1;1;2;1;3;2;2;2;3;1
+Shara Ishvalda;normal;;1;2;0;3;1;2;0;1;3;1
+Shara Ishvalda;alt;Sin cubierta;1;2;0;3;1;2;0;1;2;1
+Zinogre;normal;;1;2;0;3;1;2;2;1;2;2
+Yian Garuga;normal;;0;3;0;1;2;1;1;2;3;2
+Yian Garuga Naevus;normal;;0;3;0;1;2;1;1;2;3;2
+Tigrex Pardo;normal;;0;3;2;1;1;2;2;2;2;2
+Rathian Dorada;normal;;0;2;3;1;0;1;2;2;1;2
+Rathalos Plateado;normal;;0;3;2;1;0;1;2;2;1;2
+Rajang;normal;;0;1;0;3;0;1;1;1;2;1
+Zinogre Estigio;normal;;0;0;1;0;0;2;2;2;3;2
+Zinogre Estigio;alt;Emitiendo luz;1;2;3;1;0;;;;;
+Safi'jiiva;normal;;2;2;2;2;2;3;1;2;3;2
+Safi'jiiva;alt;Supercrítico;2;2;2;2;3;;;;;
+Rajang Rabioso;normal;;0;1;0;3;0;1;1;1;2;1
+Brachydios Colérico;normal;;0;2;1;3;1;2;2;2;1;2
+Alatreon;normal;Forma fuego;0;2;1;3;1;1;1;1;1;1
+Alatreon;alt;Forma hielo;3;1;2;0;1;1;1;1;1;1
+Alatreon;alt;Forma dragón;1;1;1;1;2;1;1;1;1;1
+Bégimo;normal;;1;2;1;2;3;2;2;2;2;2
+Leshen;normal;;3;0;2;1;2;3;0;2;2;1
+Ancient Leshen;normal;;3;0;2;1;2;3;0;2;2;1
+Barioth Cynodon;normal;;3;0;2;0;1;2;2;2;2;2
+Fatalis;normal;;2;1;1;1;3;1;1;1;1;0
