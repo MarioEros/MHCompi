@@ -1,7 +1,8 @@
 import sqlite3
 
-from mensajes import get_message
 from Datos import db_queries
+from logs import loggeador
+from mensajes import get_message
 
 con = sqlite3.connect('Datos/mhw.db')
 
@@ -10,7 +11,10 @@ cursor = con.cursor()
 def db_execute_query(query: str):
     try:
         cursor.execute(query)
+        con.commit()
+        loggeador.loggear_DB("Ejecutada con exito: " + query)
     except Exception as e:
+        loggeador.loggear_DB("Fallo al ejecutar: " + query)
         print(e)
 
 def db_tables():
@@ -61,7 +65,7 @@ def db_monster_by_lang(mons:str, lang:str):
 
 # db_tables()
 
-db_table_content('users')
+# db_table_content('users')
 # db_table_content('monster_text')
 # db_table_content('monster_hitzone')
 # db_table_content('monster_break')
@@ -74,4 +78,4 @@ db_table_content('users')
 # db_item_by_lang('ay','es')
 # db_monster_by_lang('awd','es')
 
-# db_execute_query(db_queries.sql_create_users_table)
+db_execute_query(db_queries.sql_delete_users_records)

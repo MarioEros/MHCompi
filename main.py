@@ -1,12 +1,13 @@
 import discord
 from discord.ext import commands
+
+import secret
 from services import ItemService
 
 from DDBB import mensajes
 import monsterController as monCon
-import itemController as itemCon
 import os
-from loggeador import loggear
+from logs.loggeador import loggear
 
 from KeepAlive import keep_alive
 
@@ -53,4 +54,7 @@ async def item(ctx, *args):
   
 keep_alive()
 
-bot.run(os.getenv('TOKEN'))
+# Token for replit
+# bot.run(os.getenv('TOKEN'))
+# Token for local
+bot.run(secret.TOKEN)
