@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from services import ItemService
 
 from DDBB import mensajes
 import monsterController as monCon
@@ -47,12 +48,8 @@ async def mons(ctx, *args):
 
 @bot.command()
 async def item(ctx, *args):
-  item = itemCon.buscarItem(args)
-  if item is None:
-    await ctx.send(mensajes.mensItemNoEncontrado)
-  else:
-    cuadro = discord.Embed(title=item.nombre, description=item.desc)
-    await ctx.send(embed=cuadro)
+  cuadro = ItemService.buscarItem(args)
+  await ctx.send(embed=cuadro)
   
 keep_alive()
 

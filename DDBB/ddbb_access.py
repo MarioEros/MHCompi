@@ -2,7 +2,7 @@ import sqlite3
 from DDBB.mensajes import get_message
 
 
-con = sqlite3.connect('Datos/mhw.db')
+con = sqlite3.connect('../Datos/mhw.db')
 
 cursor = con.cursor()
 
@@ -30,21 +30,38 @@ def db_table_content(table: str):
 # en,ja,fr,es
 def db_item_by_lang(item:str, lang:str):
     rows = cursor.execute("SELECT * FROM item_text WHERE name Like ? AND lang_id = ?",('%'+item+'%',lang))
-    for row in cursor:
-        print(row)
+    print([x[0] for x in cursor.description])
+    items = [x for x in cursor]
+    if len(items) == 0:
+        print(get_message('no_encontrado', lang))
+    elif len(items) == 1:
+        print(items[0])
+    else:
+        print(get_message('varios_encontrados', lang))
+        [print(x[2]) for x in items]
 
 def db_monster_by_lang(mons:str, lang:str):
-    rows = cursor.execute("SELECT * FROM monster_text WHERE name Like ? AND lang_id = ? COLLATE NOCASE",('%'+mons+'%',lang))
+    cursor.execute("SELECT * FROM monster_text WHERE name Like ? AND lang_id = ? COLLATE NOCASE",('%'+mons+'%',lang))
+    print([x[0] for x in cursor.description])
     mons = [x for x in cursor]
     if len(mons) == 0:
         print(get_message('no_encontrado',lang))
     elif len(mons) == 1:
         print(mons[0])
     else:
-        print(get_message('varios_monstruos',lang))
+        print(get_message('varios_encontrados',lang))
         [print(x[2]) for x in mons]
 
 
-# db_table_content('language')
+# db_table_content('monster')
+# db_table_content('monster_text')
+# db_table_content('monster_hitzone')
+# db_table_content('monster_break')
+# db_table_content('monster_reward_condition_text')
+# db_table_content('monster_hitzone_text')
+# db_table_content('monster_break_text')
+# db_table_content('monster_reward')
+# db_table_content('quest_monster')
+# db_table_content('monster_habitat')
 # db_item_by_lang('ay','es')
 # db_monster_by_lang('awd','es')
