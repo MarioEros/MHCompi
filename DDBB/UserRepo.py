@@ -3,7 +3,7 @@ import sqlite3
 from DDBB.MHObjects import MHUser
 from logs import loggeador
 
-con = sqlite3.connect('../Datos/mhw.db')
+con = sqlite3.connect('Datos/mhw.db')
 
 cursor = con.cursor()
 

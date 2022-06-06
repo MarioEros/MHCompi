@@ -1,13 +1,14 @@
 import discord
 from discord.ext import commands
 
+from logs.loggeador import loggear
+
 import secret
-from services import ItemService
+from services import ItemService,UserService
+from DDBB.MHObjects import MHUser
 
 from DDBB import mensajes
 import monsterController as monCon
-import os
-from logs.loggeador import loggear
 
 from KeepAlive import keep_alive
 
@@ -49,10 +50,11 @@ async def mons(ctx, *args):
 
 @bot.command()
 async def item(ctx, *args):
-  cuadro = ItemService.buscarItem(args)
-  await ctx.send(embed=cuadro)
+  MHUser = UserService.get_user_info(ctx.author)
+  # cuadro = ItemService.buscarItem(args)
+  # await ctx.send(embed=cuadro)
   
-keep_alive()
+# keep_alive()
 
 # Token for replit
 # bot.run(os.getenv('TOKEN'))
