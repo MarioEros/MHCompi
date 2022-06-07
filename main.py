@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from logs.loggeador import loggear
+from logs.loggeador import loggear,loggear_DB
 
 import secret
 from services import ItemService,UserService
@@ -13,6 +13,7 @@ import monsterController as monCon
 from KeepAlive import keep_alive
 
 bot = commands.Bot(command_prefix='$', description="Hey there, I'm Botty (for example)!")
+mh_user = None
 
 @bot.event
 async def on_ready():
@@ -23,7 +24,10 @@ async def on_message(message):
   if message.author.bot:
     return
   loggear(message.author.name+' ha enviado: '+ message.content)
+  global mh_user
+  mh_user= UserService.get_user_info(message.author)
   await bot.process_commands(message)
+  mh_user = None
   
 @bot.command(help='Hola')
 async def hola(ctx):
@@ -38,9 +42,9 @@ async def mons(ctx, *args):
   mons = monCon.buscarMonstruo(args)
   if mons is None:
     loggear('Monstruo no encontrado')
-    await ctx.send(mensajes.mensMonsNoEncontrado)
+    await ctx.send(mensajes.get_message('no_encontrado','es'))
   else:
-    loggear(mons.nombre + ' encontrado')
+    loggear(mons.nombre + ' encontrado','es')
     cuadro=discord.Embed(title = mons.nombre, description = mons.desc)
     cuadro.set_thumbnail(url=mons.url)
     for debilidad in mons.debil:
@@ -50,10 +54,20 @@ async def mons(ctx, *args):
 
 @bot.command()
 async def item(ctx, *args):
-  MHUser = UserService.get_user_info(ctx.author)
-  # cuadro = ItemService.buscarItem(args)
-  # await ctx.send(embed=cuadro)
-  
+   cuadro = ItemService.buscarItem(args)
+   await ctx.send(embed=cuadro)
+
+@bot.command()
+async def saludar(ctx, *args):
+  if len(args) != 1:
+    await ctx.send(mensajes.get_message('args_incorrectos','es'))
+  else:
+    receptor = await bot.fetch_user(args[0])
+    print(receptor)
+    loggear(receptor.__str__()+' ha sido saludado')
+    await receptor.send(mensajes.get_message('saludo','es'))
+
+
 # keep_alive()
 
 # Token for replit

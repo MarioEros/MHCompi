@@ -6,7 +6,9 @@ def get_user_info(disc_user: discord.User):
     user = MHUser(disc_user.id,disc_user.name+'#'+disc_user.discriminator,None)
     UserRepo.get_user_info(user)
     return user
-#
+
+
+
 # crearUsuario1 = discord.User
 # crearUsuario1.id = 156000408412618754
 # crearUsuario1.name = 'Kelfindel'
