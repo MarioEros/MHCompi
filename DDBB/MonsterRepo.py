@@ -1,10 +1,12 @@
 import sqlite3
 
-import clases
-from DDBB.mensajes import get_message
+from DDBB.MHObjects import Monstruo,Debilidad
 
 
-con = sqlite3.connect('../Datos/mhw.db')
+from logs.loggeador import loggear_DB
+
+
+con = sqlite3.connect('Datos/mhw.db')
 
 cursor = con.cursor()
 
@@ -14,24 +16,69 @@ db_table_content('monster_weaknesses') #['MHCOMPI_ID', 'name_en', 'form', 'alt_d
                                           'fire', 'water', 'thunder', 'ice', 'dragon',
                                           'poison', 'sleep', 'paralysis', 'blast', 'stun']
 db_table_content('monster_habitats') #['MHCOMPI_ID', 'name_en', 'map_en', 'start_area']
+['MHCOMPI_ID',
+ 'name_en', 'description_en', 'name_ja', 'description_ja', 'name_fr', 'description_fr', 'name_it', 'description_it',
+ 'name_de', 'description_de', 'name_es', 'description_es', 'name_pt', 'description_pt', 'name_pl', 'description_pl', 
+ 'name_ru', 'description_ru', 'name_ko', 'description_ko', 'name_zh', 'description_zh', 'name_ar', 'description_ar']
 '''
-def get_monster_by_lang(mons:str, lang:str):
-    cursor.execute('''
-    SELECT * FROM
-    monster_weaknesses b
-    WHERE b.name_en = ? COLLATE NOCASE''',(mons,))
-    print([x[0] for x in cursor.description])
+
+def get_monster_name_by_lang(mons: str,lang: str) -> Monstruo:
+    loggear_DB("Buscando monstruo: "+mons)
+    query = "SELECT MHCOMPI_ID, name_en, name_{0}, description_{0} FROM " \
+            "monster_base_translations WHERE name_en LIKE '{1}' COLLATE NOCASE".format(lang,mons)
+    cursor.execute(query)
     mons = [x for x in cursor]
     if len(mons) == 0:
-        print(get_message('no_encontrado',lang))
+        loggear_DB("Monstruo no encontrado.")
+        return None
     elif len(mons) == 1:
-        print(mons[0])
-        monstruo = clases.Monstruo(mons[0])
-        print(monstruo)
+        monstruo = Monstruo(mons[0])
+        loggear_DB(monstruo.nombre+" encontrado.")
+        return monstruo
     else:
-        print(get_message('varios_encontrados',lang))
-        [print(x) for x in mons]
+        monstruos = [Monstruo(x) for x in mons]
+        for x in monstruos:
+            loggear_DB("Multiples monstruos encontrados:")
+            loggear_DB(x.nombre)
+        return monstruos[0]
 
+
+def add_monster_info(monstruo:Monstruo) -> Monstruo:
+    loggear_DB("Buscando info...")
+    cursor.execute('''
+    SELECT * FROM
+    monster_base
+    WHERE name_en = ?''',(monstruo.nombre_en,))
+    found = [x for x in cursor]
+    if len(found) == 0:
+        loggear_DB("info no encontrada")
+        return monstruo
+    else:
+        print(found[0])
+        monstruo.add_info(found[0])
+        loggear_DB("info encontrada")
+        return monstruo
+
+def add_weakness(mons:Monstruo) -> Debilidad:
+    cursor.execute('''
+    SELECT * FROM
+    monster_weaknesses
+    WHERE name_en = ?''',(mons.nombre_en,))
+    debil = [x for x in cursor]
+    if len(debil) == 0:
+        loggear_DB(mons.nombre+" monstruo pequeño?")
+        return None
+    elif len(debil) == 1:
+        print(debil[0])
+        debilidad = Debilidad(debil[0])
+        loggear_DB(mons.nombre+ ", debilidad encontrada.")
+        mons.debilidades = (debilidad,)
+        return mons
+    else:
+        debilidades = [Debilidad(x) for x in debil]
+        loggear_DB(mons.nombre+",multiples debilidades encontradas.")
+        mons.debilidades = debilidades
+        return mons
 
 
 def db_table_content(table: str):
@@ -41,23 +88,14 @@ def db_table_content(table: str):
         print(row)
 
 
-def db_table_content_where(table: str, mons: str):
-    rows = cursor.execute("SELECT * FROM {0} where name_en LIKE '%{1}%' COLLATE NOCASE;".format(table,mons))
-    print([x[0] for x in cursor.description])
-    for row in cursor:
-        print(row)
-
-
-def get_hey():
-    rows = cursor.execute("SELECT * FROM monster_text WHERE alt_state_description IS NOT NULL ;")
-    print([x[0] for x in cursor.description])
-    for row in cursor:
-        print(row)
-
-# db_table_content('monster')
-# db_table_content('monster_text')
+# db_table_content('monster_base')
+# db_table_content('monster_weaknesses')
 # db_table_content_where('monster_habitats','pukei')
-get_monster_by_lang("Pukei-Pukei","es")
+# mons = get_monster_name_by_lang("%Alatr%","es")
+# print(mons)
+# debil = get_weakness(mons.nombre)
+# for x in debil:
+#     print(x)
 # get_hey()
 # db_table_content('monster_hitzone')
 # db_table_content('monster_hitzone_text')

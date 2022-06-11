@@ -6,7 +6,7 @@ class Monstruo:
     self.traps = monster[4]
 
   def __str__(self):
-    return f'Monster({self.nombre,self.ecology,self.size,self.traps})'
+    return f'Monster{self.nombre,self.ecology,self.size,self.traps}'
 
 
 class Debilidad:
@@ -25,9 +25,9 @@ class Debilidad:
     self.stun = monster[13]
 
   def __str__(self):
-    return f'''Monster({self.form,self.alt_description,
+    return f'''Debilidades{self.form,self.alt_description,
                         self.fire,self.water,self.thunder,self.ice,self.dragon,
-                        self.poison,self.sleep,self.paralysis,self.blast,self.stun,})'''
+                        self.poison,self.sleep,self.paralysis,self.blast,self.stun,}'''
 
 
 class Objeto:
