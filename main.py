@@ -37,7 +37,9 @@ async def hola(ctx):
 async def ayuda(ctx, msg):
   await ctx.send(get_message('mensAyuda','es'))
     
-@bot.command() #TODO Arreglar
+@bot.command(help="""Este comando te permite buscar un monstruo por partes de su nombre como rath plat para Rathalos Plateado
+En caso de buscar ratha y encontrar mas de uno como Rathalos y Rathalos plateado, devolverá el primero que encuentre
+""",brief="Comando para buscar monstruos",usage="diab neg",description="Buscar monstruo",)
 async def mons(ctx, *args):
   monster = MonsterService.get_monster_info(args,mh_user.lang)
   if monster is None:
@@ -54,7 +56,7 @@ async def item(ctx, *args):
   cuadro = ItemService.buscarItem(args)
   await ctx.send(embed=cuadro)
 
-@bot.command()
+@bot.command(hidden=True)
 async def saludar(ctx, *args):
   if len(args) != 1:
     await ctx.send(mensajes.get_message('args_incorrectos','es'))

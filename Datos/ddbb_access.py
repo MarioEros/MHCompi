@@ -4,7 +4,7 @@ from Datos import db_queries
 from logs import loggeador
 from mensajes import get_message
 
-con = sqlite3.connect('../Datos/mhw.db')
+con = sqlite3.connect('mhw.db')
 
 cursor = con.cursor()
 
