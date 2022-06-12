@@ -54,12 +54,12 @@ def add_monster_info(monstruo:Monstruo) -> Monstruo:
         loggear_DB("info no encontrada")
         return monstruo
     else:
-        print(found[0])
         monstruo.add_info(found[0])
         loggear_DB("info encontrada")
         return monstruo
 
 def add_weakness(mons:Monstruo) -> Debilidad:
+    loggear_DB("Buscando debilidades...")
     cursor.execute('''
     SELECT * FROM
     monster_weaknesses
@@ -67,9 +67,8 @@ def add_weakness(mons:Monstruo) -> Debilidad:
     debil = [x for x in cursor]
     if len(debil) == 0:
         loggear_DB(mons.nombre+" monstruo pequeño?")
-        return None
+        return mons
     elif len(debil) == 1:
-        print(debil[0])
         debilidad = Debilidad(debil[0])
         loggear_DB(mons.nombre+ ", debilidad encontrada.")
         mons.debilidades = (debilidad,)

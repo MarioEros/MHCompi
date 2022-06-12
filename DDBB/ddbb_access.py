@@ -63,10 +63,10 @@ def db_monster_by_lang(mons:str, lang:str):
         print(get_message('varios_encontrados',lang))
         [print(x[2]) for x in mons]
 
-db_tables()
+# db_tables()
 
 # db_table_content('users')
-# db_table_content('monster_text')
+db_table_content('monster_base_translations')
 # db_table_content('monster_hitzone')
 # db_table_content('monster_break')
 # db_table_content('monster_reward_condition_text')

@@ -41,11 +41,12 @@ async def ayuda(ctx, msg):
 async def mons(ctx, *args):
   monster = MonsterService.get_monster_info(args,mh_user.lang)
   if monster is None:
-    loggear('Monstruo no encontrado')
     await ctx.send(get_message('no_encontrado',mh_user.lang))
   else:
-    loggear(mons.nombre + ' encontrado')
-  #   await ctx.send(embed=monster)
+    cuadro = MonsterService.get_embbed_monster(monster)
+    file = discord.File("Imagenes/monster/{}.png".format(monster.nombre_en), filename="image.png")
+    cuadro.set_thumbnail(url="attachment://image.png")
+    await ctx.send(file=file, embed=cuadro)
 
 @bot.command() #TODO Arreglar
 async def item(ctx, *args):

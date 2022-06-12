@@ -16,6 +16,7 @@ class Monstruo:
     traps: str = ''
 
     def __init__(self,monster):
+        self.image = monster[0]
         self.nombre_en = monster[1]
         self.nombre = monster[2]
         self.descripcion = monster[3]
@@ -35,19 +36,9 @@ class Debilidad:
   def __init__(self,debilidad):
     self.form = debilidad[2]
     self.alt_description = debilidad[3]
-    self.fire = debilidad[4]
-    self.water = debilidad[5]
-    self.thunder = debilidad[6]
-    self.ice = debilidad[7]
-    self.dragon = debilidad[8]
-    self.poison = debilidad[9]
-    self.sleep = debilidad[10]
-    self.paralysis = debilidad[11]
-    self.blast = debilidad[12]
-    self.stun = debilidad[13]
+    self.element = (debilidad[4],debilidad[5],debilidad[6],debilidad[7],debilidad[8])
+    self.status = (debilidad[9],debilidad[10],debilidad[11],debilidad[12],debilidad[13])
 
   def __str__(self):
-    return f'''Debilidades{self.form,self.alt_description,
-                        self.fire,self.water,self.thunder,self.ice,self.dragon,
-                        self.poison,self.sleep,self.paralysis,self.blast,self.stun,}'''
+    return f'Debilidades{self.form,self.alt_description,self.element,self.status,}'
 

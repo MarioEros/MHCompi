@@ -31,31 +31,13 @@ def _get_monster_by_name(lista, lang: str):
     devolver = monRep.get_monster_name_by_lang(search,lang)
     return devolver
 
-def get_embbed_monster(lista, lang: str):
-    monstruo = get_monster_info(lista,lang)
+def get_embbed_monster(monstruo: Monstruo):
     cuadro=discord.Embed(title = monstruo.nombre, description = monstruo.descripcion)
     for debilidad in monstruo.debilidades:
-        cuadro.add_field(name="Normal" if debilidad.form=="normal" else debilidad.alt_description, value=debilidad.elemento, inline=True)
-        cuadro.add_field(name='Estados', value=mons.estado, inline=False)
-'''
-    self.form = debilidad[2]
-    self.alt_description = debilidad[3]
-    self.fire = debilidad[4]
-    self.water = debilidad[5]
-    self.thunder = debilidad[6]
-    self.ice = debilidad[7]
-    self.dragon = debilidad[8]
-    self.poison = debilidad[9]
-    self.sleep = debilidad[10]
-    self.paralysis = debilidad[11]
-    self.blast = debilidad[12]
-    self.stun = debilidad[13]
-'''
-def _format_debilidades_elem():
-    return None
-
-def _format_debilidades_stat():
-    return None
+        cuadro.add_field(name="Normal" if debilidad.form=="normal" else debilidad.alt_description, value=debilidades(debilidad.element), inline=True)
+    if len(monstruo.debilidades)>0:
+        cuadro.add_field(name='Estados', value=debilidades(monstruo.debilidades[0].status), inline=False)
+    return cuadro
 
 codeBlock = '```'
 
