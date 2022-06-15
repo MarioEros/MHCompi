@@ -1,6 +1,5 @@
 import sqlite3
 
-from Datos import db_queries
 from logs import loggeador
 from DDBB.mensajes import get_message
 
@@ -65,7 +64,7 @@ def update_monster_translation():
 
 # db_table_content('users')
 # db_table_content('monster_ailments')
-db_table_content('monster_base_translations')
+# db_table_content('monster_base_translations')
 # db_table_content('monster_breaks')
 # db_table_content('monster_hitzones')
 # db_table_content('monster_rewards')

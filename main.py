@@ -1,3 +1,4 @@
+import os #for replit
 import discord
 from discord.ext import commands
 
