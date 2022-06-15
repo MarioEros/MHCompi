@@ -1,5 +1,5 @@
 secret.py
 logs/*.log
 *.pyc
-Datos/*.py
+Datos/ddbb_access.py
 DDBB/ref*.py
