@@ -36,7 +36,7 @@ def get_embbed_monster(monstruo: Monstruo):
     for debilidad in monstruo.debilidades:
         cuadro.add_field(name="Normal" if debilidad.form=="normal" else debilidad.alt_description, value=debilidades(debilidad.element), inline=True)
     if len(monstruo.debilidades)>0:
-        cuadro.add_field(name='Estados', value=debilidades(monstruo.debilidades[0].status), inline=False)
+        cuadro.add_field(name='Estados', value=estados(monstruo.debilidades[0].status), inline=False)
     return cuadro
 
 codeBlock = '```'
