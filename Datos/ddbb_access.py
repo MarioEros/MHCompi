@@ -2,7 +2,7 @@ import sqlite3
 
 from Datos import db_queries
 from logs import loggeador
-from mensajes import get_message
+from DDBB.mensajes import get_message
 
 con = sqlite3.connect('mhw.db')
 
@@ -23,13 +23,6 @@ def db_tables():
     for x in lista:
         print(x)
 '''
-('item',)('language',)('monster',)('skilltree',)('weapon_ammo',)('weapon_melody',)('tool',)('item_text',)
-('item_combination',)('location_text',)('monster_text',)('monster_hitzone',)('monster_break',)('monster_reward_condition_text',)
-('skilltree_text',)('skill',)('armorset',)('armorset_bonus_text',)('armorset_bonus_skill',)('weapon_melody_notes',)
-('weapon_melody_text',)('decoration',)('recipe_item',)('tool_text',)('location_item',)('location_camp_text',)
-('monster_habitat',)('monster_hitzone_text',)('monster_break_text',)('monster_reward',)('armorset_text',)('armor',)
-('weapon',)('decoration_text',)('charm',)('kinsect',)('quest',)('armor_text',)('armor_skill',)('weapon_text',)
-('weapon_skill',)('charm_skill',)('charm_text',)('kinsect_text',)('quest_text',)('quest_monster',)('quest_reward',)
 '''
 
 def db_table_content(table: str):
@@ -63,18 +56,24 @@ def db_monster_by_lang(mons:str, lang:str):
         print(get_message('varios_encontrados',lang))
         [print(x[2]) for x in mons]
 
+def update_monster_translation():
+    cursor.execute("UPDATE monster_base_translations WHERE name_en = anteka COLLATE NOCASE")
+    con.commit()
+
+
 # db_tables()
 
 # db_table_content('users')
+# db_table_content('monster_ailments')
 db_table_content('monster_base_translations')
-# db_table_content('monster_hitzone')
-# db_table_content('monster_break')
-# db_table_content('monster_reward_condition_text')
-# db_table_content('monster_hitzone_text')
-# db_table_content('monster_break_text')
-# db_table_content('monster_reward')
+# db_table_content('monster_breaks')
+# db_table_content('monster_hitzones')
+# db_table_content('monster_rewards')
+# db_table_content('monster_weaknesses')
+# db_table_content('monster_habitats')
+# db_table_content('monster_base')
+
 # db_table_content('quest_monster')
-# db_table_content('monster_habitat')
 # db_item_by_lang('ay','es')
 # db_monster_by_lang('awd','es')
 

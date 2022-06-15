@@ -15,10 +15,12 @@ import secret #TODO remove to deploy in replit
 bot = commands.Bot(command_prefix='$', description="¡Soy un feline-bot que está aquí para ayudarte!")
 mh_user: DDBB.MHObjects.MHUser = None
 
+
 @bot.event
 async def on_ready():
   loggear('Estamos loggeados como {0.user}'.format(bot))
-  
+
+
 @bot.event
 async def on_message(message):
   if message.author.bot:
@@ -28,27 +30,49 @@ async def on_message(message):
   mh_user= UserService.get_user_info(message.author)
   await bot.process_commands(message)
   mh_user = None
-  
-@bot.command(help='Hola')
-async def hola(ctx):
-  await ctx.send(ctx.author.mention + ", miaumonos de caza!")
+
+
+@bot.command(hidden=True)
+async def saludar(ctx, *args):
+  if len(args) != 1:
+    await ctx.send(mensajes.get_message('args_incorrectos', mh_user.lang))
+  else:
+    receptor = await bot.fetch_user(args[0])
+    loggear(receptor.__str__() + ' ha sido saludado')
+    await receptor.send(mensajes.get_message('saludo', mh_user.lang))
+    await ctx.send(mensajes.get_message('saludo_enviado', mh_user.lang))
+
 
 @bot.command()
-async def ayuda(ctx, msg):
-  await ctx.send(get_message('mensAyuda','es'))
-    
+async def helpme(ctx, *args):
+  await ctx.send(get_message('mensAyuda', mh_user.lang))
+
+
+@bot.command()
+async def lang(ctx, *args):
+  if len(args) != 1:
+    await ctx.send(mensajes.get_message('args_incorrectos', mh_user.lang))
+  else:
+    mensaje = UserService.update_user_lang(mh_user,args[0])
+    await ctx.send(mensaje)
+
+
 @bot.command(help="""Este comando te permite buscar un monstruo por partes de su nombre como rath plat para Rathalos Plateado
 En caso de buscar ratha y encontrar mas de uno como Rathalos y Rathalos plateado, devolverá el primero que encuentre
 """,brief="Comando para buscar monstruos",usage="diab neg",description="Buscar monstruo",)
 async def mons(ctx, *args):
-  monster = MonsterService.get_monster_info(args,mh_user.lang)
-  if monster is None:
-    await ctx.send(get_message('no_encontrado',mh_user.lang))
+  if len(args) < 1:
+    await ctx.send(mensajes.get_message('args_minimos', mh_user.lang))
   else:
-    cuadro = MonsterService.get_embbed_monster(monster)
-    file = discord.File("Imagenes/monster/{}.png".format(monster.nombre_en), filename="image.png")
-    cuadro.set_thumbnail(url="attachment://image.png")
-    await ctx.send(file=file, embed=cuadro)
+    monster = MonsterService.get_monster_info(args,mh_user.lang)
+    if monster is None:
+      await ctx.send(get_message('no_encontrado',mh_user.lang))
+    else:
+      cuadro = MonsterService.get_embbed_monster(monster)
+      file = discord.File("Imagenes/monster/{}.png".format(monster.nombre_en), filename="image.png")
+      cuadro.set_thumbnail(url="attachment://image.png")
+      await ctx.send(file=file, embed=cuadro)
+
 
 @bot.command() #TODO Arreglar
 async def item(ctx, *args):
@@ -56,16 +80,7 @@ async def item(ctx, *args):
   cuadro = ItemService.buscarItem(args)
   await ctx.send(embed=cuadro)
 
-@bot.command(hidden=True)
-async def saludar(ctx, *args):
-  if len(args) != 1:
-    await ctx.send(mensajes.get_message('args_incorrectos','es'))
-  else:
-    receptor = await bot.fetch_user(args[0])
-    loggear(receptor.__str__()+' ha sido saludado')
-    await receptor.send(mensajes.get_message('saludo','es'))
-    await ctx.send(mensajes.get_message('saludo_enviado','es'))
-
+UserService.initialize_user_db()
 
 # keep_alive()
 

@@ -23,7 +23,7 @@ db_table_content('monster_habitats') #['MHCOMPI_ID', 'name_en', 'map_en', 'start
 '''
 
 def get_monster_name_by_lang(mons: str,lang: str) -> Monstruo:
-    loggear_DB("Buscando monstruo: "+mons)
+    loggear_DB("Buscando monstruo: {} lang: {}".format(mons,lang))
     query = "SELECT MHCOMPI_ID, name_en, name_{0}, description_{0} FROM " \
             "monster_base_translations WHERE name_en LIKE '{1}' COLLATE NOCASE".format(lang,mons)
     cursor.execute(query)
@@ -36,10 +36,10 @@ def get_monster_name_by_lang(mons: str,lang: str) -> Monstruo:
         loggear_DB(monstruo.nombre+" encontrado.")
         return monstruo
     else:
+        loggear_DB("Multiples monstruos encontrados:")
         monstruos = [Monstruo(x) for x in mons]
         for x in monstruos:
-            loggear_DB("Multiples monstruos encontrados:")
-            loggear_DB(x.nombre)
+            loggear_DB(" - "+x.nombre)
         return monstruos[0]
 
 
