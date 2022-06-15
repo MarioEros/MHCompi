@@ -1,4 +1,4 @@
-import os #for replit
+import os
 import discord
 from discord.ext import commands
 
@@ -10,8 +10,6 @@ from logs.loggeador import loggear
 from services import ItemService,UserService,MonsterService
 
 from KeepAlive import keep_alive
-
-import secret #TODO remove to deploy in replit
 
 bot = commands.Bot(command_prefix='$', description="¡Soy un feline-bot que está aquí para ayudarte!")
 mh_user: DDBB.MHObjects.MHUser = None
@@ -75,17 +73,9 @@ async def mons(ctx, *args):
       await ctx.send(file=file, embed=cuadro)
 
 
-@bot.command() #TODO Arreglar
-async def item(ctx, *args):
-  return None
-  cuadro = ItemService.buscarItem(args)
-  await ctx.send(embed=cuadro)
-
 UserService.initialize_user_db()
 
-# keep_alive()
+keep_alive()
 
 # Token for replit
-# bot.run(os.getenv('TOKEN'))
-# Token for local
-bot.run(secret.TOKEN)
+bot.run(os.getenv('TOKEN'))

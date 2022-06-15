@@ -1,3 +1,5 @@
 secret.py
 logs/*.log
 *.pyc
+Datos/*.py
+DDBB/ref*.py
