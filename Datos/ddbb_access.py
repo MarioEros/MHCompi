@@ -60,7 +60,7 @@ def update_monster_translation():
     con.commit()
 
 
-# db_tables()
+db_tables()
 
 # db_table_content('users')
 # db_table_content('monster_ailments')
