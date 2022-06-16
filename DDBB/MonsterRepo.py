@@ -1,4 +1,5 @@
 import sqlite3
+import os
 
 from DDBB.MHObjects import Monstruo,Debilidad
 
@@ -6,7 +7,7 @@ from DDBB.MHObjects import Monstruo,Debilidad
 from logs.loggeador import loggear_DB
 
 
-con = sqlite3.connect('Datos/mhw.db')
+con = sqlite3.connect(os.path.join('Datos','mhw.db'))
 
 cursor = con.cursor()
 

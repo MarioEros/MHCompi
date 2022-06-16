@@ -1,10 +1,11 @@
 import sqlite3
+import os
 
 import Datos.db_queries
 from DDBB.MHObjects import MHUser
 from logs.loggeador import loggear_DB
 
-con = sqlite3.connect('Datos/mhw.db')
+con = sqlite3.connect(os.path.join('Datos','mhw.db'))
 
 cursor = con.cursor()
 
