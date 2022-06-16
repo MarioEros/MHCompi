@@ -69,7 +69,7 @@ async def mons(ctx, *args):
     if monster is None:
       await ctx.send(get_message('no_encontrado',mh_user.lang))
     else:
-      cuadro = MonsterService.get_embbed_monster(monster)
+      cuadro = MonsterService.get_embbed_monster(monster, mh_user.lang)
       file = discord.File("Imagenes/monster/{}.png".format(monster.nombre_en), filename="image.png")
       cuadro.set_thumbnail(url="attachment://image.png")
       await ctx.send(file=file, embed=cuadro)

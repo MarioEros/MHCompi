@@ -3,6 +3,14 @@ import DDBB.MonsterRepo as monRep
 import unidecode
 import discord
 
+TRANSLATE={
+    'es':{'NORM':'Normal','EST':'Estados','FUE':'FUEG🔥: ','AGU':'AGUA💧: ','ELE':'ELEC🌩: ','HIE':'HIEL🧊: ','DRA':'DRAG🐉: ',
+          'VEN':'VENE🟣: ','SUE':'SUEÑ💤: ','PAR':'PARA🟡: ','NIT':'NITR💥: ','STU':'STUN✨: '},
+    'en':{'NORM':'Normal','EST':'Status','FUE':'FIRE🔥: ','AGU':'WATE💧: ','ELE':'ELEC🌩: ','HIE':'ICE 🧊: ','DRA':'DRAG🐉: ',
+          'VEN':'VENO🟣: ','SUE':'SLEE💤: ','PAR':'PARA🟡: ','NIT':'NITR💥: ','STU':'STUN✨: '},
+}
+
+
 def get_monster_info(lista, lang: str) -> Monstruo:
     """
     Recupera el mensaje embebido para devolver
@@ -11,14 +19,14 @@ def get_monster_info(lista, lang: str) -> Monstruo:
     :return: un cuadro con el mensaje embebido
     """
     if len(lista) < 1:
-        return None #TODO devolver error embebido
+        return None
     else:
         monstruo = _get_monster_by_name(lista, lang)
         if monstruo is None:
-            return None #TODO devolver error embebido
+            return None
         monstruo = monRep.add_monster_info(monstruo)
         monstruo = monRep.add_weakness(monstruo)
-        return monstruo #TODO devolver monstruo formado embebido
+        return monstruo
 
 def _get_monster_by_name(lista, lang: str):
     """
@@ -31,30 +39,30 @@ def _get_monster_by_name(lista, lang: str):
     devolver = monRep.get_monster_name_by_lang(search,lang)
     return devolver
 
-def get_embbed_monster(monstruo: Monstruo):
+def get_embbed_monster(monstruo: Monstruo, lang: str):
     cuadro=discord.Embed(title = monstruo.nombre, description = monstruo.descripcion)
     for debilidad in monstruo.debilidades:
-        cuadro.add_field(name="Normal" if debilidad.form=="normal" else debilidad.alt_description, value=debilidades(debilidad.element), inline=True)
+        cuadro.add_field(name=TRANSLATE[lang]['NORM'] if debilidad.form=="normal" else debilidad.alt_description, value=debilidades(debilidad.element, lang), inline=True)
     if len(monstruo.debilidades)>0:
-        cuadro.add_field(name='Estados', value=debilidades(monstruo.debilidades[0].status), inline=False)
+        cuadro.add_field(name=TRANSLATE[lang]['EST'], value=estados(monstruo.debilidades[0].status, lang), inline=False)
     return cuadro
 
 codeBlock = '```'
 
-def debilidades(datos):
-    fuego = 'FUE🔥: '+estrellas(datos[0])
-    agua = '\nAGU💧: '+estrellas(datos[1])
-    rayo = '\nELE🌩️: '+estrellas(datos[2])
-    hielo = '\nHIE🧊: '+estrellas(datos[3])
-    draco = '\nDRA🐉: '+estrellas(datos[4])
+def debilidades(datos, lang: str):
+    fuego = TRANSLATE[lang]['FUE']+estrellas(datos[0])
+    agua = '\n'+TRANSLATE[lang]['AGU']+estrellas(datos[1])
+    rayo = '\n'+TRANSLATE[lang]['ELE']+estrellas(datos[2])
+    hielo = '\n'+TRANSLATE[lang]['HIE']+estrellas(datos[3])
+    draco = '\n'+TRANSLATE[lang]['DRA']+estrellas(datos[4])
     return codeBlock+fuego+agua+rayo+hielo+draco+codeBlock
 
-def estados(datos):
-    veneno = 'Veneno:\t'+estrellas(datos[0])
-    sueno = '\nSueño:\t '+estrellas(datos[1])
-    paralisis = '\nParalisis: '+estrellas(datos[2])
-    nitro = '\nNitro:\t '+estrellas(datos[3])
-    stun = '\nStun:\t  '+estrellas(datos[4])
+def estados(datos, lang: str):
+    veneno = TRANSLATE[lang]['VEN']+estrellas(datos[0])
+    sueno = '\n'+TRANSLATE[lang]['SUE']+estrellas(datos[1])
+    paralisis = '\n'+TRANSLATE[lang]['PAR']+estrellas(datos[2])
+    nitro = '\n'+TRANSLATE[lang]['NIT']+estrellas(datos[3])
+    stun = '\n'+TRANSLATE[lang]['STU']+estrellas(datos[4])
     return codeBlock+veneno+sueno+paralisis+nitro+stun+codeBlock
 
 def estrellas(num):
