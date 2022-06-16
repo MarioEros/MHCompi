@@ -3,6 +3,7 @@ import DDBB.MonsterRepo as monRep
 import unidecode
 import discord
 
+
 TRANSLATE={
     'es':{'NORM':'Normal','EST':'Estados','FUE':'FUEG🔥: ','AGU':'AGUA💧: ','ELE':'ELEC🌩: ','HIE':'HIEL🧊: ','DRA':'DRAG🐉: ',
           'VEN':'VENE🟣: ','SUE':'SUEÑ💤: ','PAR':'PARA🟡: ','NIT':'NITR💥: ','STU':'STUN✨: '},
@@ -13,10 +14,10 @@ TRANSLATE={
 
 def get_monster_info(lista, lang: str) -> Monstruo:
     """
-    Recupera el mensaje embebido para devolver
+    Recupera un monstruo
     :param lista: una lista de partes del nombre de un monstruo
     :param lang: el lenguaje del usuario
-    :return: un cuadro con el mensaje embebido
+    :return: el objeto Monstruo
     """
     if len(lista) < 1:
         return None
@@ -30,10 +31,10 @@ def get_monster_info(lista, lang: str) -> Monstruo:
 
 def _get_monster_by_name(lista, lang: str):
     """
-    El monstruo busca un monstruo
+    Encuentra el nombre de un monstruo por su nombre
     :param lang: el lenguaje del usuario
     :param lista: una lista de partes del nombre de un monstruo
-    :return: Un Monstruo con nombre y descripcion solo
+    :return: Un Monstruo con nombre, nombre_en y descripcion
     """
     search = unidecode.unidecode("%"+"%".join(lista)+"%")
     devolver = monRep.get_monster_name_by_lang(search,lang)
