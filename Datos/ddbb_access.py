@@ -27,8 +27,14 @@ def db_tables():
 def db_table_content(table: str):
     rows = cursor.execute("SELECT * FROM {};".format(table))
     print([x[0] for x in cursor.description])
+    cont = 1
     for row in cursor:
         print(row)
+        if cont > 50:
+            break
+        cont+=1
+    print([x[0] for x in cursor.description])
+    print(table)
 
 # en,ja,fr,es
 def db_item_by_lang(item:str, lang:str):
@@ -61,7 +67,6 @@ def update_monster_translation():
 
 
 # db_tables()
-
 # db_table_content('users')
 # db_table_content('monster_ailments')
 # db_table_content('monster_base_translations')
@@ -71,6 +76,10 @@ def update_monster_translation():
 # db_table_content('monster_weaknesses')
 # db_table_content('monster_habitats')
 # db_table_content('monster_base')
+
+# db_table_content('item_base')
+# db_table_content('item_base_translations')
+# db_table_content('item_combination_list')#TODO añadir combinaciones
 
 # db_table_content('quest_monster')
 # db_item_by_lang('ay','es')
