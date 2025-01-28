@@ -3,3 +3,5 @@ logs/*.log
 *.pyc
 Datos/ddbb_access.py
 DDBB/ref*.py
+.env
+.vscode
