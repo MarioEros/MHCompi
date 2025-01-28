@@ -42,3 +42,29 @@ class Debilidad:
   def __str__(self):
     return f'Debilidades{self.form,self.alt_description,self.element,self.status,}'
 
+class Item:
+    category: str =''
+    subcategory: str =''
+    rarity: int = None
+    buy_price: int = None
+    sell_price: int = None
+    carry_limit: int = None
+    points: int = None
+    icon_name: str =''
+    icon_color: str =''
+
+    def __init__(self,rows):
+        self.nombre_en = rows[1]
+        self.nombre = rows[2]
+        self.descripcion = rows[3]
+
+    def add_info(self, rows):
+        self.category = rows[3]
+        self.subcategory = rows[4]
+        self.rarity = rows[5]
+        self.buy_price = rows[6]
+        self.sell_price = rows[7]
+        self.carry_limit = rows[8]
+        self.points = rows[9]
+        self.icon_name = rows[10]
+        self.icon_color = rows[11]

@@ -89,9 +89,20 @@ async def mons(ctx: commands.Context, *args: str):
         else:
             await ctx.send(embed=cuadro)
 
-UserService.initialize_user_db()
+@bot.command()
+async def item(ctx, *args):
+  if len(args) < 1:
+    await ctx.send(mensajes.get_message('args_minimos', mh_user.lang))
+  else:
+    item = ItemService.get_item_info(args, mh_user.lang)
+    if item is None:
+      await ctx.send(get_message('no_encontrado',mh_user.lang))
+    else:
+      cuadro = ItemService.get_embbed_item(item, mh_user.lang)
+      await ctx.send(embed=cuadro)
 
+UserService.initialize_user_db()
+#Truco para replit, no necesario?
 keep_alive()
 
-# Token for replit
 bot.run(token)
